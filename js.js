@@ -1,34 +1,15 @@
-const button = document.getElementById("explodeBtn");
+const button = document.getElementById("showVideo");
+const videoContainer = document.getElementById("videoContainer");
 
 button.addEventListener("click", () => {
-  // Убираем кнопку
-  button.style.display = "none";
-
-  // Берем все элементы body
-  const bodyContent = document.body.innerHTML;
-  document.body.innerHTML = ""; // Очищаем страницу
-
-  // Создаем фрагменты
-  for (let i = 0; i < 100; i++) {
-    const fragment = document.createElement("div");
-    fragment.className = "fragment";
-    fragment.textContent = randomChar(); // Случайный символ
-    fragment.style.left = `${Math.random() * 100}vw`;
-    fragment.style.top =гося сайта” можно с помощью 
-    document.body.appendChild(fragment);
-
-    // Добавляем анимацию взрыва
-    const angle = Math.random() * 360; // Угол разлета
-    const distance = Math.random() * 100 + 50; // Дистанция разлета
-    fragment.style.transform = `translate(${distance * Math.cos(angle)}px, ${
-      distance * Math.sin(angle)
-    }px) rotate(${Math.random() * 360}deg)`;
-    fragment.style.opacity = "0"; // Исчезновение
+  // Проверяем, чтобы видео добавилось только один раз
+  if (!document.querySelector("video")) {
+    // Создаем элемент видео
+    const video = document.createElement("video");
+    video.setAttribute("controls", "true"); // Добавляем управление видео
+    video.setAttribute("autoplay", "true"); // Видео запускается автоматически
+    video.src = "https://www.w3schools.com/html/mov_bbb.mp4"; // Ссылка на видео
+    video.type = "video/mp4"; // Указываем тип файла
+    videoContainer.appendChild(video); // Добавляем видео в контейнер
   }
 });
-
-// Функция для генерации случайного символа
-function randomChar() {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
-  return chars.charAt(Math.floor(Math.random() * chars.length));
-}
